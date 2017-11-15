@@ -1,9 +1,7 @@
 package main
 
 import (
-	"bytes"
 	"context"
-	"encoding/gob"
 	"encoding/json"
 	"io/ioutil"
 	"log"
@@ -37,10 +35,7 @@ func main() {
 	}
 
 	md5ToSave := os.Args[1:]
-	md5Buf := &bytes.Buffer{}
-	gob.NewEncoder(md5Buf).Encode(strings.TrimSpace(strings.Join(md5ToSave, "")))
-
-	if md5ToSave == nil {
+	if len(md5ToSave) < 1 {
 		log.Fatal("please pass in an MD5 to save")
 	}
 
@@ -89,7 +84,7 @@ func main() {
 	gasLimit := big.NewInt(40000)
 	gasPrice := big.NewInt(0)
 	gasPrice.Div(goodGasPrice, big.NewInt(2))
-	dataToSend := md5Buf.Bytes()
+	dataToSend := []byte(strings.Join(md5ToSave, ""))
 	dummyTrans := types.NewTransaction(nonce, toAddress, amount, gasLimit, goodGasPrice, dataToSend)
 
 	// sign transaction
