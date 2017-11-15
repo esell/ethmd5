@@ -59,11 +59,6 @@ func main() {
 	myKeyStore := keystore.NewKeyStore(".", 1, 2)
 	myAccounts := myKeyStore.Accounts()
 	log.Println("accounts: ", myAccounts[0])
-	err = myKeyStore.Unlock(myAccounts[0], parsedConfig.AccountPass)
-	if err != nil {
-		log.Println("unable to unlock account: ", err)
-		return
-	}
 
 	// transaction stuff
 	goodGasPrice, err := ethClient.SuggestGasPrice(ctx)
