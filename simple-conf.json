@@ -1,0 +1,5 @@
+{
+    "endpoint": "http://hostname:8545",
+    "accountPass": "Password!@#",
+    "accountAddress": "0x098023748712857jkasdhf987"
+}
